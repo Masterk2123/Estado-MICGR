@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Ejecutivo - Portal CGR</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .header p {
+            text-align: center;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .progress-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .progress-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .progress-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .progress-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            position: relative;
+            background: conic-gradient(#4CAF50 0deg 234deg, #f0f0f0 234deg 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-circle::before {
+            content: '';
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: white;
+            position: absolute;
+        }
+
+        .progress-text {
+            position: relative;
+            z-index: 1;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .card-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .card-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #f0f0f0;
+        }
+
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5em;
+            color: white;
+        }
+
+        .section-left { background: linear-gradient(135deg, #FF6B6B, #FF8E8E); }
+        .section-center { background: linear-gradient(135deg, #4ECDC4, #44A08D); }
+        .section-right { background: linear-gradient(135deg, #45B7D1, #96C93D); }
+
+        .section-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .item-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .item:hover {
+            transform: translateX(5px);
+        }
+
+        .status-badge {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .status-ok { background: #4CAF50; }
+        .status-pending { background: #FF9800; }
+        .status-missing { background: #F44336; }
+        .status-review { background: #2196F3; }
+
+        .item-completed { background: #e8f5e8; }
+        .item-pending { background: #fff3cd; }
+        .item-missing { background: #f8d7da; }
+        .item-review { background: #cce5ff; }
+
+        .item-text {
+            flex: 1;
+            font-size: 0.9em;
+        }
+
+        .item-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 2px;
+        }
+
+        .item-desc {
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        .stats-footer {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+
+        .progress-development {
+            background: conic-gradient(#FF9800 0deg 36deg, #f0f0f0 36deg 360deg);
+        }
+
+        .progress-missing {
+            background: conic-gradient(#F44336 0deg 90deg, #f0f0f0 90deg 360deg);
+        }
+
+        .search-filter {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .sections-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .progress-overview {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏛️ Portal CGR - Dashboard Ejecutivo</h1>
+            <p>Reporte de Transición • Fecha: 11/07/2025 • Preparado por: Kevin - Nicolas</p>
+        </div>
+
+        <div class="progress-overview">
+            <div class="progress-card">
+                <div class="progress-circle">
+                    <div class="progress-text">65%</div>
+                </div>
+                <div class="card-title">Completado</div>
+                <div class="card-subtitle">Elementos funcionando correctamente</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-circle progress-development">
+                    <div class="progress-text">10%</div>
+                </div>
+                <div class="card-title">En Desarrollo</div>
+                <div class="card-subtitle">Requiere revisión o documentos</div>
+            </div>
+            <div class="progress-card">
+                <div class="progress-circle progress-missing">
+                    <div class="progress-text">25%</div>
+                </div>
+                <div class="card-title">Pendiente</div>
+                <div class="card-subtitle">Pospuesto para desarrollo futuro</div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color status-ok"></div>
+                <span>Completado</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color status-review"></div>
+                <span>En Revisión</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color status-pending"></div>
+                <span>En Desarrollo</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color status-missing"></div>
+                <span>Pendiente</span>
+            </div>
+        </div>
+
+        <div class="sections-grid">
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon section-left">📋</div>
+                    <div>
+                        <div class="section-title">Servicios Administrativos</div>
+                        <div style="color: #666;">Sección Izquierda</div>
+                    </div>
+                </div>
+                <div class="search-filter">
+                    <input type="text" class="search-input" placeholder="Buscar en servicios..." id="searchLeft">
+                </div>
+                <div class="item-list" id="leftItems">
+                    <!-- Elementos críticos pendientes -->
+                    <div class="item item-missing">
+                        <div class="status-badge status-missing"></div>
+                        <div class="item-text">
+                            <div class="item-title">Mesa de Servicio</div>
+                            <div class="item-desc">CRÍTICO - No implementada</div>
+                        </div>
+                    </div>
+                    <div class="item item-missing">
+                        <div class="status-badge status-missing"></div>
+                        <div class="item-text">
+                            <div class="item-title">Función Fiscalizadora</div>
+                            <div class="item-desc">CRÍTICO - No implementada</div>
+                        </div>
+                    </div>
+                    <div class="item item-missing">
+                        <div class="status-badge status-missing"></div>
+                        <div class="item-text">
+                            <div class="item-title">Función Jurídica</div>
+                            <div class="item-desc">CRÍTICO - No implementada</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Elementos completados -->
+                    <div class="item item-completed">
+                        <div class="status-badge status-ok"></div>
+                        <div class="item-text">
+                            <div class="item-title">DPTO. Bienestar</div>
+                            <div class="item-desc">Completado - Alto impacto</div>
+                        </div>
+                    </div>
+                    <div class="item item-completed">
+                        <div class="status-badge status-ok"></div>
+                        <div class="item-text">
+                            <div class="item-title">DPTO. Remuneraciones</div>
+                            <div class="item-desc">6/7 elementos completados</div>
+                        </div>
+                    </div>
+                    <div class="item item-completed">
+                        <div class="status-badge status-ok"></div>
+                        <div class="item-text">
+                            <div class="item-title">Formularios Tipo</div>
+                            <div class="item-desc">5/6 formularios funcionando</div>
+                        </div>
+                    </div>
+                    <div class="item item-completed">
+                        <div class="status-badge status-ok"></div>
+                        <div class="item-text">
+                            <div class="item-title">Control de Vehículos</div>
+                            <div class="item-desc">Todos los servicios activos</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Elementos en desarrollo -->
+                    <div class="item item-pending">
+                        <div class="status-badge status-pending"></div>
+                        <div class="item-text">
+                            <div class="item-title">DPTO. de Personas</div>
+                            <div class="item-desc">Faltan archivos principales</div>
+                        </div>
+                    </div>
+                    <div class="item item-pending">
+                        <div class="status-badge status-pending"></div>
+                        <div class="item-text">
+                            <div class="item-title">Centro de Datos e IA</div>
+                            <div class="item-desc">Falta CSS y alineaciones</div>
+                        </div>
+                    </div>
+                    <div class="item item-review">
+                        <div class="status-badge status-review"></div>
+                        <div class="item-text">
+                            <div class="item-title">CEA - Botones</div>
+                            <div class="item-desc">Carrusel OK, botones pendientes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon section-center">🏠</div>
+                    <div>
+                        <div class="section-title">Navegación Principal</div>
+                        <div style="color: #666;">Sección Central</div>
+                    </div>
+                </div>
+                <div class="search-filter">
+                    <input type="text" class="search-input" placeholder="Buscar en navegación..." id="searchCenter">
+                </div>
+                <div class="item-list" id="centerItems">
+                    <!-- Elementos completados -->
+                    <div class="item item-completed">
+                        <div class="status-badge status-ok"></div>
+                        <div class="item-text">
+                            <div class="item-title">Navegación Superior</div>
+                            <div class="item-desc">Funcionando correctamente</div>
+                        </div>
+                    </div>
+                    <div class="item item-completed">
+                        <div class="status-badge status-ok"></div>
+                        <div class="item-text">
+                            <div class="item-title">Navegación Central</div>
+                            <div class="item-desc">Funcionando correctamente</div>
+                        </div>
+                    </div>
+                    <div class="item item-completed">
+                        <div class="status-badge status-ok"></div>
+                        <div class="item-text">
+                            <div class="item-title">Noticias</div>
+                            <div class="item-desc">Sistema funcionando</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Elementos en revisión -->
+                    <div class="item item-review">
+                        <div class="status-badge status-review"></div>
+                        <div class="item-text">
+                            <div class="item-title">Carrusel Principal</div>
+                            <div class="item-desc">Requiere actualización de contenido</div>
+                        </div>
+                    </div>
+                    <div class="item item-review">
+                        <div class="status-badge status-review"></div>
+                        <div class="item-text">
+                            <div class="item-title">Botón Bienestar</div>
+                            <div class="item-desc">Falta CSS global y contenido</div>
+                        </div>
+                    </div>
+                    <div class="item item-review">
+                        <div class="status-badge status-review"></div>
+                        <div class="item-text">
+                            <div class="item-title">Convocatorias</div>
+                            <div class="item-desc">Falta enlace histórico y 1 noticia</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Elementos pendientes -->
+                    <div class="item item-pending">
+                        <div class="status-badge status-pending"></div>
+                        <div class="item-text">
+                            <div class="item-title">Comité Paritario</div>
+                            <div class="item-desc">Faltan CSS en preguntas frecuentes</div>
+                        </div>
+                    </div>
+                    <div class="item item-missing">
+                        <div class="status-badge status-missing"></div>
+                        <div class="item-text">
+                            <div class="item-title">Header Completo</div>
+                            <div class="item-desc">Ausente en desarrollo</div>
+                        </div>
+                    </div>
+                    <div class="item item-review">
+                        <div class="status-badge status-review"></div>
+                        <div class="item-text">
+                            <div class="item-title">Noticias Históricas</div>
+                            <div class="item-desc">Faltan +3000 noticias por subir</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <div class="section-icon section-right">🔧</div>
+                    <div>
+                        <div class="section-title">Herramientas y Apoyo</div>
+                        <div style="color: #666;">Sección Derecha</div>
+                    </div>
+                </div>
+                <div class="search-filter">
+                    <input type="text" class="search-input" placeholder="Buscar en herramientas..." id="searchRight">
+                </div>
+                <div class="item-list" id="rightItems">
+                    <!-- Elementos completados -->
+                    <div class="item item-completed">
+                        <div class="status-badge status-ok"></div>
+                        <div class="item-text">
+                            <div class="item-title">Buscador</div>
+                            <div class="item-desc">Reposicionado correctamente</div>
+                        </div>
+                    </div>
+                    <div class="item item-completed">
+                        <div class="status-badge status-ok"></div>
+                        <div class="item-text">
+                            <div class="item-title">Carrusel Visual</div>
+                            <div class="item-desc">Actualizado con 2 imágenes</div>
+                        </div>
+                    </div>
+                    <div class="item item-completed">
+                        <div class="status-badge status-ok"></div>
+                        <div class="item-text">
+                            <div class="item-title">Recursos Gráficos</div>
+                            <div class="item-desc">Sistema funcionando</div>
+                        </div>
+                    </div>
+                    <div class="item item-completed">
+                        <div class="status-badge status-ok"></div>
+                        <div class="item-text">
+                            <div class="item-title">Materia Contable</div>
+                            <div class="item-desc">Completado</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Elementos pendientes críticos -->
+                    <div class="item item-missing">
+                        <div class="status-badge status-missing"></div>
+                        <div class="item-text">
+                            <div class="item-title">Cumpleaños</div>
+                            <div class="item-desc">No funcional - No implementado</div>
+                        </div>
+                    </div>
+                    <div class="item item-pending">
+                        <div class="status-badge status-pending"></div>
+                        <div class="item-text">
+                            <div class="item-title">Menú Casino CGR</div>
+                            <div class="item-desc">Falta enlazar</div>
+                        </div>
+                    </div>
+                    <div class="item item-pending">
+                        <div class="status-badge status-pending"></div>
+                        <div class="item-text">
+                            <div class="item-title">Indicadores Económicos</div>
+                            <div class="item-desc">En revisión</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sección de apoyo -->
+                    <div class="item item-review">
+                        <div class="status-badge status-review"></div>
+                        <div class="item-text">
+                            <div class="item-title">Jurisprudencia</div>
+                            <div class="item-desc">Faltan archivos 2017-2022</div>
+                        </div>
+                    </div>
+                    <div class="item item-pending">
+                        <div class="status-badge status-pending"></div>
+                        <div class="item-text">
+                            <div class="item-title">Materia Auditoria</div>
+                            <div class="item-desc">CSS global y páginas faltantes</div>
+                        </div>
+                    </div>
+                    <div class="item item-pending">
+                        <div class="status-badge status-pending"></div>
+                        <div class="item-text">
+                            <div class="item-title">Ámbito Internacional</div>
+                            <div class="item-desc">Múltiples contenidos pendientes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-footer">
+            <h3 style="text-align: center; margin-bottom: 20px; color: #333;">📊 Estadísticas del Proyecto</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" style="color: #4CAF50;">65%</div>
+                    <div class="stat-label">Completado</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" style="color: #2196F3;">15</div>
+                    <div class="stat-label">Elementos en Revisión</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" style="color: #FF9800;">12</div>
+                    <div class="stat-label">En Desarrollo</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" style="color: #F44336;">8</div>
+                    <div class="stat-label">Elementos Críticos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" style="color: #9C27B0;">3000+</div>
+                    <div class="stat-label">Noticias por Subir</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" style="color: #607D8B;">25%</div>
+                    <div class="stat-label">Pendiente Total</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función de búsqueda para cada sección
+        function setupSearch(inputId, containerId) {
+            const input = document.getElementById(inputId);
+            const container = document.getElementById(containerId);
+            
+            input.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const items = container.querySelectorAll('.item');
+                
+                items.forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Configurar búsqueda para todas las secciones
+        setupSearch('searchLeft', 'leftItems');
+        setupSearch('searchCenter', 'centerItems');
+        setupSearch('searchRight', 'rightItems');
+
+        // Animaciones al cargar
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.section-card, .progress-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'all 0.5s ease';
+                    
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
