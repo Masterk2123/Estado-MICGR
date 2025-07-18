@@ -6,6 +6,19 @@
     <title>Dashboard Ejecutivo - Portal CGR</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            /* Colores oficiales CGR */
+            --cgr-blue: #1e40af;
+            --cgr-light-blue: #3b82f6;
+            --cgr-cyan: #06b6d4;
+            --cgr-green: #10b981;
+            --cgr-yellow: #f59e0b;
+            --cgr-red: #ef4444;
+            --cgr-gray: #334155;
+            --cgr-dark: #0f172a;
+            --cgr-light: #e2e8f0;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -14,9 +27,9 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            background: linear-gradient(135deg, var(--cgr-dark) 0%, #1e293b 50%, var(--cgr-gray) 100%);
             min-height: 100vh;
-            color: #e2e8f0;
+            color: var(--cgr-light);
             overflow-x: hidden;
         }
 
@@ -53,7 +66,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #06b6d4 100%);
+            background: linear-gradient(135deg, var(--cgr-blue) 0%, var(--cgr-light-blue) 50%, var(--cgr-cyan) 100%);
             color: white;
             padding: 40px;
             border-radius: 24px;
@@ -62,6 +75,7 @@
             position: relative;
             overflow: hidden;
             transition: all 0.5s ease;
+            border: 1px solid rgba(255,255,255,0.15);
         }
 
         .header:hover {
@@ -125,6 +139,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .progress-overview {
@@ -184,19 +200,19 @@
         }
 
         .progress-completed {
-            background: conic-gradient(#10b981 0deg 229deg, rgba(255,255,255,0.2) 229deg 360deg);
+            background: conic-gradient(var(--cgr-green) 0deg 229deg, rgba(255,255,255,0.2) 229deg 360deg);
         }
 
         .progress-development {
-            background: conic-gradient(#f59e0b 0deg 11deg, rgba(255,255,255,0.2) 11deg 360deg);
+            background: conic-gradient(var(--cgr-yellow) 0deg 11deg, rgba(255,255,255,0.2) 11deg 360deg);
         }
 
         .progress-pending {
-            background: conic-gradient(#ef4444 0deg 56deg, rgba(255,255,255,0.2) 56deg 360deg);
+            background: conic-gradient(var(--cgr-red) 0deg 56deg, rgba(255,255,255,0.2) 56deg 360deg);
         }
 
         .progress-review {
-            background: conic-gradient(#3b82f6 0deg 63deg, rgba(255,255,255,0.2) 63deg 360deg);
+            background: conic-gradient(var(--cgr-light-blue) 0deg 63deg, rgba(255,255,255,0.2) 63deg 360deg);
         }
 
         .progress-circle::before {
@@ -214,7 +230,7 @@
             z-index: 1;
             font-size: 1.8em;
             font-weight: 700;
-            color: #e2e8f0;
+            color: var(--cgr-light);
         }
 
         .card-title {
@@ -298,17 +314,17 @@
         }
 
         .section-left { 
-            background: linear-gradient(135deg, #ef4444, #dc2626);
+            background: linear-gradient(135deg, var(--cgr-red), #dc2626);
             box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
         }
 
         .section-center { 
-            background: linear-gradient(135deg, #10b981, #059669);
+            background: linear-gradient(135deg, var(--cgr-green), #059669);
             box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
         }
 
         .section-right { 
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            background: linear-gradient(135deg, var(--cgr-light-blue), #2563eb);
             box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
         }
 
@@ -336,13 +352,13 @@
             border-radius: 12px;
             font-size: 14px;
             background: rgba(255,255,255,0.05);
-            color: #e2e8f0;
+            color: var(--cgr-light);
             transition: all 0.3s ease;
         }
 
         .search-input:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-color: var(--cgr-light-blue);
             background: rgba(255,255,255,0.1);
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
@@ -422,31 +438,31 @@
         }
 
         .status-ok { 
-            background: #10b981;
+            background: var(--cgr-green);
         }
         .status-ok::before { 
-            background: #10b981;
+            background: var(--cgr-green);
         }
 
         .status-pending { 
-            background: #f59e0b;
+            background: var(--cgr-yellow);
         }
         .status-pending::before { 
-            background: #f59e0b;
+            background: var(--cgr-yellow);
         }
 
         .status-missing { 
-            background: #ef4444;
+            background: var(--cgr-red);
         }
         .status-missing::before { 
-            background: #ef4444;
+            background: var(--cgr-red);
         }
 
         .status-review { 
-            background: #3b82f6;
+            background: var(--cgr-light-blue);
         }
         .status-review::before { 
-            background: #3b82f6;
+            background: var(--cgr-light-blue);
         }
 
         .item-completed { 
@@ -579,7 +595,7 @@
 
         .legend-item.active {
             background: rgba(59, 130, 246, 0.2);
-            border-color: #3b82f6;
+            border-color: var(--cgr-light-blue);
         }
 
         .legend-color {
@@ -610,7 +626,7 @@
         .filter-tab:hover,
         .filter-tab.active {
             background: rgba(59, 130, 246, 0.2);
-            border-color: #3b82f6;
+            border-color: var(--cgr-light-blue);
             color: #60a5fa;
         }
 
@@ -626,7 +642,7 @@
         .progress-bar {
             height: 100%;
             border-radius: 10px;
-            background: linear-gradient(90deg, #10b981, #3b82f6);
+            background: linear-gradient(90deg, var(--cgr-green), var(--cgr-light-blue));
             width: 65%;
             position: relative;
             transition: width 1s ease;
@@ -759,28 +775,109 @@
 
         .status-completed {
             background: rgba(16, 185, 129, 0.2);
-            color: #10b981;
+            color: var(--cgr-green);
         }
 
         .status-pending {
             background: rgba(245, 158, 11, 0.2);
-            color: #f59e0b;
+            color: var(--cgr-yellow);
         }
 
         .status-missing {
             background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
+            color: var(--cgr-red);
         }
 
         .status-review {
             background: rgba(59, 130, 246, 0.2);
-            color: #3b82f6;
+            color: var(--cgr-light-blue);
         }
 
         .critical-item {
-            border-left: 4px solid #ef4444;
+            border-left: 4px solid var(--cgr-red);
             padding-left: 10px;
             margin-bottom: 15px;
+        }
+        
+        /* Nuevos elementos */
+        .priority-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .priority-high {
+            background-color: var(--cgr-red);
+        }
+        
+        .priority-medium {
+            background-color: var(--cgr-yellow);
+        }
+        
+        .priority-low {
+            background-color: var(--cgr-green);
+        }
+        
+        .progress-timeline {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .progress-timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255,255,255,0.1);
+            z-index: 1;
+        }
+        
+        .timeline-milestone {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 24%;
+        }
+        
+        .milestone-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--cgr-gray);
+            border: 2px solid var(--cgr-light-blue);
+            margin: 0 auto 10px;
+        }
+        
+        .milestone-dot.completed {
+            background: var(--cgr-green);
+            border-color: var(--cgr-green);
+        }
+        
+        .milestone-label {
+            font-size: 0.8em;
+            color: #cbd5e1;
+        }
+        
+        .cgr-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.2);
         }
 
         @media (max-width: 768px) {
@@ -802,6 +899,15 @@
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .progress-timeline {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .timeline-milestone {
+                width: 48%;
             }
         }
 
@@ -830,6 +936,10 @@
                 padding: 8px 12px;
                 font-size: 0.8em;
             }
+            
+            .timeline-milestone {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -837,17 +947,40 @@
     <div class="particles" id="particles"></div>
     
     <div class="container">
+        <div class="cgr-logo">
+            <i class="fas fa-landmark"></i>
+        </div>
+        
         <div class="header">
             <div class="header-content">
-                <h1><i class="fas fa-landmark"></i> Portal CGR - Dashboard Ejecutivo</h1>
+                <h1><i class="fas fa-chart-line"></i> Portal CGR - Dashboard Ejecutivo</h1>
                 <p>Reporte de Transición • Avance general del proyecto: 65%</p>
                 <div class="progress-bar-container">
                     <div class="progress-bar"></div>
                 </div>
                 <div class="header-info">
-                    <div class="info-badge"><i class="far fa-calendar-alt"></i> Fecha: 18/07/2025</div>
+                    <div class="info-badge"><i class="far fa-calendar-alt"></i> Fecha: 11/07/2025</div>
                     <div class="info-badge"><i class="fas fa-user-tie"></i> Destinatario: Jonnathan Arrué</div>
                     <div class="info-badge"><i class="fas fa-users"></i> Preparado por: Kevin - Nicolas</div>
+                </div>
+                
+                <div class="progress-timeline">
+                    <div class="timeline-milestone">
+                        <div class="milestone-dot completed"></div>
+                        <div class="milestone-label">Inicio</div>
+                    </div>
+                    <div class="timeline-milestone">
+                        <div class="milestone-dot completed"></div>
+                        <div class="milestone-label">Diseño</div>
+                    </div>
+                    <div class="timeline-milestone">
+                        <div class="milestone-dot"></div>
+                        <div class="milestone-label">Desarrollo</div>
+                    </div>
+                    <div class="timeline-milestone">
+                        <div class="milestone-dot"></div>
+                        <div class="milestone-label">Implementación</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -885,7 +1018,7 @@
 
         <div class="legend">
             <div class="legend-item active" onclick="filterAllItems()">
-                <div class="legend-color" style="background: #10b981;"></div>
+                <div class="legend-color" style="background: var(--cgr-green);"></div>
                 <span>Todos (65%)</span>
             </div>
             <div class="legend-item" onclick="filterByStatus('completed')">
@@ -930,7 +1063,7 @@
                     <div class="item item-missing" data-category="missing" onclick="showItemDetail('Mesa de Servicio', 'CRÍTICO - No implementada (Pendiente)', 'missing', 'Se requiere implementación urgente para la funcionalidad completa del sistema. Impacto alto en operaciones diarias.')">
                         <div class="status-badge status-missing"></div>
                         <div class="item-text">
-                            <div class="item-title">Mesa de Servicio</div>
+                            <div class="item-title"><span class="priority-indicator priority-high"></span> Mesa de Servicio</div>
                             <div class="item-desc">CRÍTICO - No implementada (Pendiente)</div>
                         </div>
                         <div class="item-actions">
@@ -940,7 +1073,7 @@
                     <div class="item item-missing" data-category="missing" onclick="showItemDetail('Función Fiscalizadora', 'CRÍTICO - No implementada (No terminado)', 'missing', 'Función crítica para el cumplimiento del rol institucional. Actualmente no está disponible en el portal.')">
                         <div class="status-badge status-missing"></div>
                         <div class="item-text">
-                            <div class="item-title">Función Fiscalizadora</div>
+                            <div class="item-title"><span class="priority-indicator priority-high"></span> Función Fiscalizadora</div>
                             <div class="item-desc">CRÍTICO - No implementada (No terminado)</div>
                         </div>
                         <div class="item-actions">
@@ -950,7 +1083,7 @@
                     <div class="item item-missing" data-category="missing" onclick="showItemDetail('Función Jurídica', 'CRÍTICO - No implementada, falta incorporar contenido', 'missing', 'Sección esencial para consultas y documentación legal. Falta desarrollo de contenido y estructura.')">
                         <div class="status-badge status-missing"></div>
                         <div class="item-text">
-                            <div class="item-title">Función Jurídica</div>
+                            <div class="item-title"><span class="priority-indicator priority-high"></span> Función Jurídica</div>
                             <div class="item-desc">CRÍTICO - No implementada, falta incorporar contenido</div>
                         </div>
                         <div class="item-actions">
@@ -960,7 +1093,7 @@
                     <div class="item item-missing" data-category="missing" onclick="showItemDetail('Centro de Datos e IA', 'No terminado - Falta CSS alineaciones y colores', 'missing', 'Módulo técnico que requiere ajustes visuales para su correcto funcionamiento y presentación.')">
                         <div class="status-badge status-missing"></div>
                         <div class="item-text">
-                            <div class="item-title">Centro de Datos e IA</div>
+                            <div class="item-title"><span class="priority-indicator priority-medium"></span> Centro de Datos e IA</div>
                             <div class="item-desc">No terminado - Falta CSS alineaciones y colores</div>
                         </div>
                         <div class="item-actions">
@@ -972,7 +1105,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Dpto. Bienestar', 'Completado - Incorporado con sus redirecciones', 'completed', 'Departamento completamente funcional con todas sus secciones y enlaces correctamente implementados.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Dpto. Bienestar</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Dpto. Bienestar</div>
                             <div class="item-desc">Completado - Incorporado con sus redirecciones</div>
                         </div>
                         <div class="item-actions">
@@ -982,7 +1115,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Dpto. Remuneraciones', 'Completado - Todos los módulos funcionando', 'completed', 'Todos los módulos de remuneraciones están operativos: liquidación de sueldo, certificados, viáticos, formatos, escalas y calendarios.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Dpto. Remuneraciones</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Dpto. Remuneraciones</div>
                             <div class="item-desc">Completado - Todos los módulos funcionando</div>
                         </div>
                         <div class="item-actions">
@@ -992,7 +1125,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Formularios Tipo', 'Mayoría completada - Algunos formularios pendientes', 'completed', 'La mayoría de los formularios están implementados, excepto "Contraloría General te Escucha" que está pendiente.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Formularios Tipo</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Formularios Tipo</div>
                             <div class="item-desc">Mayoría completada - Algunos formularios pendientes</div>
                         </div>
                         <div class="item-actions">
@@ -1002,7 +1135,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Dpto. Servicios y Control Vehículos', 'Completado - Todos los servicios activos', 'completed', 'Todos los servicios relacionados con vehículos y seguridad están completamente funcionales.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Dpto. Servicios y Control Vehículos</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Dpto. Servicios y Control Vehículos</div>
                             <div class="item-desc">Completado - Todos los servicios activos</div>
                         </div>
                         <div class="item-actions">
@@ -1012,7 +1145,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Links de Interés', 'Completado - Todos los enlaces funcionando', 'completed', 'Todos los enlaces externos e internos de interés están verificados y funcionando correctamente.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Links de Interés</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Links de Interés</div>
                             <div class="item-desc">Completado - Todos los enlaces funcionando</div>
                         </div>
                         <div class="item-actions">
@@ -1024,7 +1157,7 @@
                     <div class="item item-pending" data-category="pending" onclick="showItemDetail('CEA - Botones Navegación', 'Pendiente - Carrusel completado, faltan botones', 'pending', 'El carrusel está implementado pero faltan los controles de navegación para mejorar la usabilidad.')">
                         <div class="status-badge status-pending"></div>
                         <div class="item-text">
-                            <div class="item-title">CEA - Botones Navegación</div>
+                            <div class="item-title"><span class="priority-indicator priority-medium"></span> CEA - Botones Navegación</div>
                             <div class="item-desc">Pendiente - Carrusel completado, faltan botones</div>
                         </div>
                         <div class="item-actions">
@@ -1034,7 +1167,7 @@
                     <div class="item item-pending" data-category="pending" onclick="showItemDetail('Contraloría General te Escucha', 'Pendiente - Falta incorporación de formulario', 'pending', 'Formulario de contacto crítico que necesita ser implementado para recepción de consultas ciudadanas.')">
                         <div class="status-badge status-pending"></div>
                         <div class="item-text">
-                            <div class="item-title">Contraloría General te Escucha</div>
+                            <div class="item-title"><span class="priority-indicator priority-medium"></span> Contraloría General te Escucha</div>
                             <div class="item-desc">Pendiente - Falta incorporación de formulario</div>
                         </div>
                         <div class="item-actions">
@@ -1067,7 +1200,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Navegación Superior', 'Funcionando correctamente', 'completed', 'Barra de navegación superior con todas sus funciones operativas y accesibles.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Navegación Superior</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Navegación Superior</div>
                             <div class="item-desc">Funcionando correctamente</div>
                         </div>
                         <div class="item-actions">
@@ -1077,7 +1210,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Navegación Central', 'Funcionando correctamente', 'completed', 'Navegación principal del portal completamente funcional y optimizada.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Navegación Central</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Navegación Central</div>
                             <div class="item-desc">Funcionando correctamente</div>
                         </div>
                         <div class="item-actions">
@@ -1087,7 +1220,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Noticias', 'Funcionando correctamente', 'completed', 'Sección de noticias operativa con capacidad de publicación y visualización de contenidos.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Noticias</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Noticias</div>
                             <div class="item-desc">Funcionando correctamente</div>
                         </div>
                         <div class="item-actions">
@@ -1097,7 +1230,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Botón Convocatoria', 'Completado - No se implementarán históricas', 'completed', 'Funcionalidad de convocatorias implementada según lo planeado, sin historial de convocatorias pasadas.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Botón Convocatoria</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Botón Convocatoria</div>
                             <div class="item-desc">Completado - No se implementarán históricas</div>
                         </div>
                         <div class="item-actions">
@@ -1107,7 +1240,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Botón Comité Paritario', 'Completado - Falta tema CSS global', 'completed', 'Funcionalidad completa pero requiere ajustes de estilo para coherencia visual con el resto del portal.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Botón Comité Paritario</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Botón Comité Paritario</div>
                             <div class="item-desc">Completado - Falta tema CSS global</div>
                         </div>
                         <div class="item-actions">
@@ -1117,7 +1250,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Sección Histórica Noticias', 'Completado', 'completed', 'Archivo histórico de noticias completamente funcional y accesible.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Sección Histórica Noticias</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Sección Histórica Noticias</div>
                             <div class="item-desc">Completado</div>
                         </div>
                         <div class="item-actions">
@@ -1129,7 +1262,7 @@
                     <div class="item item-pending" data-category="pending" onclick="showItemDetail('Carrusel Principal', 'Pendiente - Requiere actualización de contenido', 'pending', 'Componente visual principal que necesita actualización de imágenes y contenidos relevantes.')">
                         <div class="status-badge status-pending"></div>
                         <div class="item-text">
-                            <div class="item-title">Carrusel Principal</div>
+                            <div class="item-title"><span class="priority-indicator priority-medium"></span> Carrusel Principal</div>
                             <div class="item-desc">Pendiente - Requiere actualización de contenido</div>
                         </div>
                         <div class="item-actions">
@@ -1139,7 +1272,7 @@
                     <div class="item item-pending" data-category="pending" onclick="showItemDetail('Botón Bienestar - Beneficios', 'Pendiente - Préstamos Social y Fondo Social Solidario', 'pending', 'Falta implementar formularios para solicitud de préstamos sociales y acceso al fondo solidario.')">
                         <div class="status-badge status-pending"></div>
                         <div class="item-text">
-                            <div class="item-title">Botón Bienestar - Beneficios</div>
+                            <div class="item-title"><span class="priority-indicator priority-medium"></span> Botón Bienestar - Beneficios</div>
                             <div class="item-desc">Pendiente - Préstamos Social y Fondo Social Solidario</div>
                         </div>
                         <div class="item-actions">
@@ -1149,7 +1282,7 @@
                     <div class="item item-pending" data-category="pending" onclick="showItemDetail('Deporte y Recreación', 'Pendiente - Múltiples formularios por incorporar', 'pending', 'Sección de deportes requiere implementación de formularios para bonos deportivos, gimnasios y fondos concursables.')">
                         <div class="status-badge status-pending"></div>
                         <div class="item-text">
-                            <div class="item-title">Deporte y Recreación</div>
+                            <div class="item-title"><span class="priority-indicator priority-medium"></span> Deporte y Recreación</div>
                             <div class="item-desc">Pendiente - Múltiples formularios por incorporar</div>
                         </div>
                         <div class="item-actions">
@@ -1159,7 +1292,7 @@
                     <div class="item item-pending" data-category="pending" onclick="showItemDetail('Marquesina', 'No terminado - Falta CSS y creación de página', 'pending', 'Componente visual importante que requiere desarrollo de diseño y estructura de contenidos.')">
                         <div class="status-badge status-pending"></div>
                         <div class="item-text">
-                            <div class="item-title">Marquesina</div>
+                            <div class="item-title"><span class="priority-indicator priority-medium"></span> Marquesina</div>
                             <div class="item-desc">No terminado - Falta CSS y creación de página</div>
                         </div>
                         <div class="item-actions">
@@ -1192,7 +1325,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Carrusel', 'Completado - Actualizado e implementado', 'completed', 'Carrusel de imágenes actualizado según requerimientos, con dos imágenes implementadas.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Carrusel</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Carrusel</div>
                             <div class="item-desc">Completado - Actualizado e implementado</div>
                         </div>
                         <div class="item-actions">
@@ -1202,7 +1335,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Menú casino CGR', 'Completado', 'completed', 'Información sobre menú del casino completamente funcional y actualizable.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Menú casino CGR</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Menú casino CGR</div>
                             <div class="item-desc">Completado</div>
                         </div>
                         <div class="item-actions">
@@ -1212,7 +1345,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Sistema de integridad institución', 'Completado', 'completed', 'Módulo de integridad institucional completamente implementado y funcional.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Sistema de integridad institución</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Sistema de integridad institución</div>
                             <div class="item-desc">Completado</div>
                         </div>
                         <div class="item-actions">
@@ -1222,7 +1355,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Recursos gráficos institucionales', 'Completado', 'completed', 'Todos los recursos gráficos y branding institucional disponibles y accesibles.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Recursos gráficos institucionales</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Recursos gráficos institucionales</div>
                             <div class="item-desc">Completado</div>
                         </div>
                         <div class="item-actions">
@@ -1232,7 +1365,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('DIP - Declare aquí', 'Completado', 'completed', 'Módulo de declaraciones completamente funcional y accesible para los funcionarios.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">DIP - Declare aquí</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> DIP - Declare aquí</div>
                             <div class="item-desc">Completado</div>
                         </div>
                         <div class="item-actions">
@@ -1242,7 +1375,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Política de personas', 'Completado', 'completed', 'Documentación sobre políticas de personas completamente disponible.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Política de personas</div>
+                            <div class="item-title"><span class="priority-indicator priority-low"></span> Política de personas</div>
                             <div class="item-desc">Completado</div>
                         </div>
                         <div class="item-actions">
@@ -1252,7 +1385,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Materias Jurídicas', 'Parcialmente completado - Falta jurisprudencia', 'completed', 'La mayoría de las secciones jurídicas están completas, excepto búsqueda de jurisprudencia histórica.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Materias Jurídicas</div>
+                            <div class="item-title"><span class="priority-indicator priority-medium"></span> Materias Jurídicas</div>
                             <div class="item-desc">Parcialmente completado - Falta jurisprudencia</div>
                         </div>
                         <div class="item-actions">
@@ -1262,7 +1395,7 @@
                     <div class="item item-completed" data-category="completed" onclick="showItemDetail('Tecnología de información', 'En proceso - Nicolas trabajando en ello', 'completed', 'Módulo de TI en desarrollo activo por parte del equipo técnico.')">
                         <div class="status-badge status-ok"></div>
                         <div class="item-text">
-                            <div class="item-title">Tecnología de información</div>
+                            <div class="item-title"><span class="priority-indicator priority-medium"></span> Tecnología de información</div>
                             <div class="item-desc">En proceso - Nicolas trabajando en ello</div>
                         </div>
                         <div class="item-actions">
@@ -1274,7 +1407,7 @@
                     <div class="item item-pending" data-category="pending" onclick="showItemDetail('Buscador', 'Pendiente - Reposicionar correctamente', 'pending', 'Componente de búsqueda necesita reubicación según diseño y requerimientos de usabilidad.')">
                         <div class="status-badge status-pending"></div>
                         <div class="item-text">
-                            <div class="item-title">Buscador</div>
+                            <div class="item-title"><span class="priority-indicator priority-medium"></span> Buscador</div>
                             <div class="item-desc">Pendiente - Reposicionar correctamente</div>
                         </div>
                         <div class="item-actions">
@@ -1284,7 +1417,7 @@
                     <div class="item item-pending" data-category="pending" onclick="showItemDetail('Cumpleaños', 'Pendiente', 'pending', 'Sección de reconocimiento de cumpleaños pendiente de implementación.')">
                         <div class="status-badge status-pending"></div>
                         <div class="item-text">
-                            <div class="item-title">Cumpleaños</div>
+                            <div class="item-title"><span class="priority-indicator priority-medium"></span> Cumpleaños</div>
                             <div class="item-desc">Pendiente</div>
                         </div>
                         <div class="item-actions">
@@ -1294,7 +1427,7 @@
                     <div class="item item-pending" data-category="pending" onclick="showItemDetail('Indicadores Económicos', 'Pendiente - En revisión', 'pending', 'Módulo de indicadores económicos pendiente de aprobación y revisión final.')">
                         <div class="status-badge status-pending"></div>
                         <div class="item-text">
-                            <div class="item-title">Indicadores Económicos</div>
+                            <div class="item-title"><span class="priority-indicator priority-medium"></span> Indicadores Económicos</div>
                             <div class="item-desc">Pendiente - En revisión</div>
                         </div>
                         <div class="item-actions">
@@ -1304,7 +1437,7 @@
                     <div class="item item-pending" data-category="pending" onclick="showItemDetail('Buscar jurisprudencia', 'Pendiente - Falta contenido histórico', 'pending', 'Falta incorporar jurisprudencia de los meses del año 2016 al 2022. Requiere revisión por jefatura.')">
                         <div class="status-badge status-pending"></div>
                         <div class="item-text">
-                            <div class="item-title">Buscar jurisprudencia</div>
+                            <div class="item-title"><span class="priority-indicator priority-high"></span> Buscar jurisprudencia</div>
                             <div class="item-desc">Pendiente - Falta contenido histórico</div>
                         </div>
                         <div class="item-actions">
@@ -1314,7 +1447,7 @@
                     <div class="item item-pending" data-category="pending" onclick="showItemDetail('Ordenes de Servicio', 'No terminado - Falta desarrollo', 'pending', 'Módulo de órdenes de servicio no extrae la fecha establecida. Requiere desarrollo adicional.')">
                         <div class="status-badge status-pending"></div>
                         <div class="item-text">
-                            <div class="item-title">Ordenes de Servicio</div>
+                            <div class="item-title"><span class="priority-indicator priority-high"></span> Ordenes de Servicio</div>
                             <div class="item-desc">No terminado - Falta desarrollo</div>
                         </div>
                         <div class="item-actions">
@@ -1324,7 +1457,7 @@
                     <div class="item item-pending" data-category="pending" onclick="showItemDetail('Materia auditoria', 'No terminado - CSS y enlaces pendientes', 'pending', 'Página de auditoría requiere actualizaciones, ajustes CSS y enlaces correctos.')">
                         <div class="status-badge status-pending"></div>
                         <div class="item-text">
-                            <div class="item-title">Materia auditoria</div>
+                            <div class="item-title"><span class="priority-indicator priority-high"></span> Materia auditoria</div>
                             <div class="item-desc">No terminado - CSS y enlaces pendientes</div>
                         </div>
                         <div class="item-actions">
@@ -1334,7 +1467,7 @@
                     <div class="item item-pending" data-category="pending" onclick="showItemDetail('Documentos Auditoria', 'Pendiente - Falta contenido', 'pending', 'Sección de documentos de auditoría pendiente de carga de contenidos relevantes.')">
                         <div class="status-badge status-pending"></div>
                         <div class="item-text">
-                            <div class="item-title">Documentos Auditoria</div>
+                            <div class="item-title"><span class="priority-indicator priority-high"></span> Documentos Auditoria</div>
                             <div class="item-desc">Pendiente - Falta contenido</div>
                         </div>
                         <div class="item-actions">
@@ -1344,7 +1477,7 @@
                     <div class="item item-pending" data-category="pending" onclick="showItemDetail('Documento Jurídicos', 'Pendiente - Falta contenido', 'pending', 'Documentación jurídica pendiente de incorporación al sistema.')">
                         <div class="status-badge status-pending"></div>
                         <div class="item-text">
-                            <div class="item-title">Documento Jurídicos</div>
+                            <div class="item-title"><span class="priority-indicator priority-high"></span> Documento Jurídicos</div>
                             <div class="item-desc">Pendiente - Falta contenido</div>
                         </div>
                         <div class="item-actions">
@@ -1354,7 +1487,7 @@
                     <div class="item item-pending" data-category="pending" onclick="showItemDetail('Delegaciones', 'No terminado - Falta desarrollo', 'pending', 'Módulo de delegaciones no extrae la fecha establecida. Requiere ajustes técnicos.')">
                         <div class="status-badge status-pending"></div>
                         <div class="item-text">
-                            <div class="item-title">Delegaciones</div>
+                            <div class="item-title"><span class="priority-indicator priority-high"></span> Delegaciones</div>
                             <div class="item-desc">No terminado - Falta desarrollo</div>
                         </div>
                         <div class="item-actions">
